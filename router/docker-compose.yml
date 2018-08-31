@@ -1,0 +1,40 @@
+version: '2'
+services:
+  router:
+    container_name: router
+    image: nginx:1.15.2
+    #working_dir: /usr/share/nginx/html
+    restart: always
+    #logging:
+    #  driver: none
+    volumes:
+      - ./config/default.conf:/etc/nginx/conf.d/default.conf
+    network_mode: "host"
+
+  server-app-1:
+    container_name: server-app-1
+    image: node
+    working_dir: /usr/share/app
+    environment:
+      PORT: 3000
+    command:
+      - npm
+      - start
+    restart: always
+    volumes:
+      - ../server:/usr/share/app
+    network_mode: "host"
+
+  server-app-2:
+    container_name: server-app-2
+    image: node
+    working_dir: /usr/share/app
+    environment:
+      PORT: 4000
+    command:
+      - npm
+      - start
+    restart: always
+    volumes:
+      - ../server:/usr/share/app
+    network_mode: "host"
