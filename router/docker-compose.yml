@@ -38,3 +38,78 @@ services:
     volumes:
       - ../server:/usr/share/app
     network_mode: "host"
+
+  server-app-3:
+    container_name: server-app-3
+    image: node
+    working_dir: /usr/share/app
+    environment:
+      PORT: 5000
+    command:
+      - npm
+      - start
+    restart: always
+    volumes:
+      - ../server:/usr/share/app
+    network_mode: "host"
+
+  server-app-4:
+    container_name: server-app-4
+    image: node
+    working_dir: /usr/share/app
+    environment:
+      PORT: 6000
+    command:
+      - npm
+      - start
+    restart: always
+    volumes:
+      - ../server:/usr/share/app
+    network_mode: "host"
+
+  server-app-5:
+    container_name: server-app-5
+    image: node
+    working_dir: /usr/share/app
+    environment:
+      PORT: 7000
+    command:
+      - npm
+      - start
+    restart: always
+    volumes:
+      - ../server:/usr/share/app
+    network_mode: "host"
+
+  server-app-6:
+    container_name: server-app-6
+    image: node
+    working_dir: /usr/share/app
+    environment:
+      PORT: 8000
+    command:
+      - npm
+      - start
+    restart: always
+    volumes:
+      - ../server:/usr/share/app
+    network_mode: "host"
+
+  server-app-7:
+    container_name: server-app-7
+    image: node
+    working_dir: /usr/share/app
+    environment:
+      PORT: 9000
+    command:
+      - npm
+      - start
+    restart: always
+    volumes:
+      - ../server:/usr/share/app
+    network_mode: "host"
+
+
+
+
+
