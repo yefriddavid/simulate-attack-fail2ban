@@ -1,6 +1,6 @@
 # Docs
 
-We are going to make a simulate a brute attack and block with fail2ban to protecte our server.
+We are going to make a simple brute attack and block it with fail2ban to protected our server.
 
 ### Guys now I am working in this procjec..
 
