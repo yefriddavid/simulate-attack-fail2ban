@@ -17,6 +17,13 @@ services:
     network_mode: "host"
 
 
+  server-app-no-host:
+    image: node:10.9
+    working_dir: /usr/share/app
+    command:
+      - npm
+      - start
+    restart: always
 
 
 

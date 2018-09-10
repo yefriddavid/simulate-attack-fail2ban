@@ -4,18 +4,22 @@ services:
     container_name: router
     hostname: myapp
     domainname: myapp.com
+    command:
+      - sh
+      - /app/onStartServer.sh
     extends:
       file: ./base-compose.yml
       service: router
     environment:
       PORT: ${PORT}
-    #logging:
-    #  driver: none
     volumes:
+      - ./config/onStartServer.sh:/app/onStartServer.sh
       - ./config/default.conf:/etc/nginx/conf.d/default.conf
-
+      - ./config/default.conf:/app/test.conf:rw
   server-app-1:
     container_name: server-app-1
+    logging:
+      driver: none
     extends:
       file: ./base-compose.yml
       service: server-app
@@ -23,7 +27,6 @@ services:
       PORT: 3000
     volumes:
       - ../server:/usr/share/app
-
 
   server-app-2:
     container_name: server-app-2
@@ -80,12 +83,22 @@ services:
     container_name: server-app-7
     extends:
       file: ./base-compose.yml
-      service: server-app
-    working_dir: /usr/share/app
+      service: server-app-no-host
+    networks:
+      strawberry_net:
+       ipv4_address: 174.17.0.200
     environment:
-      PORT: 9000
+      PORT: 80
     volumes:
       - ../server:/usr/share/app
 
-
+networks:
+  strawberry_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 174.17.0.0/16
+    driver_opts:
+      "com.docker.network.bridge.name": "strawberry-net"
 
