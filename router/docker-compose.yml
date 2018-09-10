@@ -4,18 +4,19 @@ services:
     container_name: router
     hostname: myapp
     domainname: myapp.com
-    command:
-      - sh
-      - /app/onStartServer.sh
+    #    command:
+    #      - sh
+    #      - /app/onStartServer.sh
     extends:
       file: ./base-compose.yml
       service: router
     environment:
       PORT: ${PORT}
     volumes:
-      - ./config/onStartServer.sh:/app/onStartServer.sh
       - ./config/default.conf:/etc/nginx/conf.d/default.conf
-      - ./config/default.conf:/app/test.conf:rw
+#      - ./config/onStartServer.sh:/app/onStartServer.sh
+#      - ./config/default.conf:/app/test.conf:rw
+
   server-app-1:
     container_name: server-app-1
     logging:
