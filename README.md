@@ -11,7 +11,7 @@ cd router
 docker-compose up -d
 cd ..
 cd attacker
-go run attacker.go
+go run main.go 1000
 ```
 
 

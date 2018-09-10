@@ -59,7 +59,6 @@ func runAttack(index int, serviseURI string, wg *sync.WaitGroup) int {
   defer resp.Body.Close()
   body, _ := ioutil.ReadAll(resp.Body)
   fmt.Printf("%d) %s \n", index, string(body))
-  //fmt.Printf("code %d \n", resp.StatusCode)
   wg.Done()
   return resp.StatusCode
 }
