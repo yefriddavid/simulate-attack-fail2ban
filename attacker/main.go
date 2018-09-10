@@ -2,25 +2,34 @@ package main
 
 import (
   "fmt"
+  "os"
   "sync"
+  "strconv"
   "net/http"
   "io/ioutil"
 )
 
 func main(){
 	var wg sync.WaitGroup
-  for i := 0; i < 100000 ; i++ {
-  //for i := 0; i < 100 ; i++ {
+  var totalCalls int = 1000000
+  var serviseURI string = "http://127.0.0.1"
+
+  if (len(os.Args) > 1) {
+    totalCalls, _ = strconv.Atoi(os.Args[1])
+  }
+
+  if (len(os.Args) > 2) {
+    serviseURI = os.Args[2]
+  }
+  for i := 0; i < totalCalls ; i++ {
     wg.Add(1)
-    runAttack(i, &wg)
+    runAttack(i, serviseURI, &wg)
   }
   wg.Wait()
 }
 
 
-func runAttack(index int, wg *sync.WaitGroup) bool {
-	serviseURI := `http://127.0.0.1`
-
+func runAttack(index int, serviseURI string, wg *sync.WaitGroup) bool {
   req, err := http.NewRequest("GET", serviseURI, nil)
   req.Header.Set("Content-Type", "text/xml")
 
@@ -33,8 +42,6 @@ func runAttack(index int, wg *sync.WaitGroup) bool {
   defer resp.Body.Close()
   body, _ := ioutil.ReadAll(resp.Body)
   fmt.Printf("%d) %s \n", index, string(body))
-  //fmt.Println(string(body))
-  //fmt.Println(index)
   wg.Done()
   return true
 }

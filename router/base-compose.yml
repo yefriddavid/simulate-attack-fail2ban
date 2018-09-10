@@ -1,0 +1,22 @@
+version: '2'
+services:
+  router:
+    container_name: router
+    image: nginx:1.15.2
+    working_dir: /usr/share/nginx/html
+    restart: always
+    network_mode: "host"
+
+  server-app:
+    image: node:10.9
+    working_dir: /usr/share/app
+    command:
+      - npm
+      - start
+    restart: always
+    network_mode: "host"
+
+
+
+
+
