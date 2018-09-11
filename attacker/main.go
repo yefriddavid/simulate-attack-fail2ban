@@ -63,7 +63,7 @@ func runAttack(index int, serviceURI string, wg *sync.WaitGroup, showBody bool, 
   defer resp.Body.Close()
   body, _ := ioutil.ReadAll(resp.Body)
   if(showBody == true){
-    fmt.Printf("%d) %s \n", index, string(body))
+    fmt.Printf("%d) code: %d, %s \n", index, resp.StatusCode, string(body))
   }
 
   if(showHeader == true){
