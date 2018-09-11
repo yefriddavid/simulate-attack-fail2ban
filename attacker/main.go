@@ -2,6 +2,7 @@ package main
 
 import (
   "fmt"
+  "time"
   "os"
   "sync"
   "strconv"
@@ -10,8 +11,10 @@ import (
 )
 
 func main(){
+  start := time.Now()
+
 	var wg sync.WaitGroup
-  var totalCalls int = 100000
+  var totalCalls int = 10000
   var serviseURI string = "http://127.0.0.1"
   var statusCode int
   var total200 int
@@ -35,12 +38,13 @@ func main(){
     }
   }
   wg.Wait()
-
+  end := time.Now()
 
   fmt.Printf("Total calls: %d \n", totalCalls)
   fmt.Printf("Total 200 response: %d \n", total200)
-  fmt.Printf("Total diferent from 200: %d \n", totalNo200)
-
+  fmt.Printf("Total different from 200: %d \n", totalNo200)
+  fmt.Print("Duration: ")
+  fmt.Println(end.Sub(start))
 
 
 }
