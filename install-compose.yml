@@ -10,18 +10,18 @@ services:
       - npm
       - install
     volumes:
-      - ../server-auth:/usr/share/app
+      - ./server-auth:/usr/share/app
 
   server-app-install:
     container_name: server-app-install
     restart: 'no'
     extends:
       file: ./base-compose.yml
-      service: server-app-host-mode
+      service: server-app
     command:
       - npm
       - install
     volumes:
-      - ../server:/usr/share/app
+      - ./server:/usr/share/app
 
 
