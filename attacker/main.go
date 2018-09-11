@@ -47,8 +47,12 @@ func main(){
 
 
 func runAttack(index int, serviceURI string, wg *sync.WaitGroup, showBody bool, showHeader bool) int {
+  var username string = "abcd"
+  var passwd string = fmt.Sprintf("123%d", index)
   req, err := http.NewRequest("GET", serviceURI, nil)
   req.Header.Set("Content-Type", "text/xml")
+  //req.Header.Set("Authorization", "Basic YWJjZDoxMjM0")
+  req.SetBasicAuth(username, passwd)
 
   client := &http.Client{}
   resp, err := client.Do(req)
