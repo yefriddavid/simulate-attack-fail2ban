@@ -12,10 +12,9 @@ import (
 
 func main(){
   start := time.Now()
-
 	var wg sync.WaitGroup
   var totalCalls int = 10000
-  var serviseURI string = "http://127.0.0.1"
+  var serviceURI string = "http://127.0.0.1"
   var statusCode int
   var total200 int
   var totalNo200 int
@@ -23,14 +22,13 @@ func main(){
   if (len(os.Args) > 1) {
     totalCalls, _ = strconv.Atoi(os.Args[1])
   }
-
   if (len(os.Args) > 2) {
-    serviseURI = os.Args[2]
+    serviceURI = os.Args[2]
   }
 
   for i := 0; i < totalCalls ; i++ {
     wg.Add(1)
-    statusCode = runAttack(i, serviseURI, &wg)
+    statusCode = runAttack(i, serviceURI, &wg, true, false)
     if (statusCode == 200){
       total200 += 1
     }else{
@@ -45,13 +43,11 @@ func main(){
   fmt.Printf("Total different from 200: %d \n", totalNo200)
   fmt.Print("Duration: ")
   fmt.Println(end.Sub(start))
-
-
 }
 
 
-func runAttack(index int, serviseURI string, wg *sync.WaitGroup) int {
-  req, err := http.NewRequest("GET", serviseURI, nil)
+func runAttack(index int, serviceURI string, wg *sync.WaitGroup, showBody bool, showHeader bool) int {
+  req, err := http.NewRequest("GET", serviceURI, nil)
   req.Header.Set("Content-Type", "text/xml")
 
   client := &http.Client{}
@@ -62,7 +58,13 @@ func runAttack(index int, serviseURI string, wg *sync.WaitGroup) int {
   }
   defer resp.Body.Close()
   body, _ := ioutil.ReadAll(resp.Body)
-  fmt.Printf("%d) %s \n", index, string(body))
+  if(showBody == true){
+    fmt.Printf("%d) %s \n", index, string(body))
+  }
+
+  if(showHeader == true){
+    fmt.Println("Headers: ", resp.Header)
+  }
   wg.Done()
   return resp.StatusCode
 }
