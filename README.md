@@ -31,8 +31,8 @@ Password: 1234
 
 ### References
 
-https://easyengine.io/tutorials/nginx/fail2ban/
-https://www.nginx.com/blog/dynamic-ip-blacklisting-with-nginx-plus-and-fail2ban/
-https://www.ctrl.blog/entry/fail2ban-http403
+https://easyengine.io/tutorials/nginx/fail2ban/ \
+https://www.nginx.com/blog/dynamic-ip-blacklisting-with-nginx-plus-and-fail2ban/ \
+https://www.ctrl.blog/entry/fail2ban-http403 \
 https://www.digitalocean.com/community/tutorials/how-to-protect-an-nginx-server-with-fail2ban-on-ubuntu-14-04
 
