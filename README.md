@@ -26,7 +26,7 @@ server.app
 ### User and Password
 
 User: abcd \
-Password: 1234 \
+Password: 1234 
 
 
 ### References
