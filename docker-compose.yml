@@ -20,6 +20,7 @@ services:
       service: server-app
     environment:
       PORT: 80
+      APP_TARGET: ${APP_TARGET}
     networks:
       strawberry_net:
        ipv4_address: 174.17.0.100

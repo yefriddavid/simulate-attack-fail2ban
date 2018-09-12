@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "basic-auth": "^2.0.0",
-    "dotenv": "^6.0.0"
+    "dotenv": "^6.0.0",
+    "http-proxy": "^1.17.0"
   }
 }
